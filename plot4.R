@@ -1,6 +1,15 @@
 # Load additional library extensions used for datetime
 library("lubridate", lib.loc="~/Library/R/3.1/library")
 
+# Getting the source data
+if(!file.exists("~/exdata-data-household_power_consumption.zip")){
+  download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",destfile="~/exdata-data-household_power_consumption.zip",method="curl", quiet=TRUE)
+}
+
+if(!file.exists("~/household_power_consumption.txt")){
+  unzip("~/exdata-data-household_power_consumption.zip", "household_power_consumption.txt")
+}
+
 # Load source data for Feb 1-2 2007
 hpc <- read.csv("./household_power_consumption.txt", sep = ';', stringsAsFactors = FALSE)
 hpc <- subset(hpc, Date == '1/2/2007' | Date == '2/2/2007')
